@@ -1,0 +1,33 @@
+// Prisma schema for Postgres storage
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum JobStatus {
+  PENDING
+  PROCESSING
+  COMPLETE
+  FAILED
+}
+
+model CompositionJob {
+  id           String    @id @default(cuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  status       JobStatus @default(PENDING)
+  genre        String?
+  subgenre     String?
+  instruments  Json
+  sections     Json
+
+  originalPath String
+  outputPath   String?
+  errorMessage String?
+}

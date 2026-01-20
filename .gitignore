@@ -1,0 +1,20 @@
+# dependencies
+node_modules
+
+# next
+.next
+out
+
+# env
+.env
+.env.local
+
+# prisma
+prisma/migrations
+
+# uploads / outputs
+uploads
+outputs
+
+# misc
+.DS_Store
