@@ -2,16 +2,17 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { composeWithAI } from '@/lib/ai-composer';
 
 export const runtime = 'nodejs';
 
 /**
- * Composition stub.
+ * Composition endpoint with AI integration.
  *
- * In the next iteration we'll:
- *  - parse the uploaded MIDI
- *  - generate new tracks per requested instruments/sections
- *  - render back to a MIDI file
+ * This endpoint:
+ *  - Parses the uploaded MIDI
+ *  - Uses OpenAI to generate new tracks per requested instruments/sections
+ *  - Renders the composed arrangement back to a MIDI file
  */
 export async function POST(
   _request: Request,
@@ -32,11 +33,19 @@ export async function POST(
     const outputsDir = path.join(process.cwd(), 'outputs');
     await fs.mkdir(outputsDir, { recursive: true });
 
-    const originalBuf = await fs.readFile(job.originalPath);
-
-    // TODO: replace this with real composition logic.
     const outputPath = path.join(outputsDir, `${jobId}__composed.mid`);
-    await fs.writeFile(outputPath, originalBuf);
+
+    // Use AI composer to generate the arrangement
+    await composeWithAI(
+      {
+        midiPath: job.originalPath,
+        genre: job.genre || undefined,
+        subgenre: job.subgenre || undefined,
+        instruments: job.instruments as string[],
+        sections: job.sections as any[]
+      },
+      outputPath
+    );
 
     await prisma.compositionJob.update({
       where: { id: jobId },

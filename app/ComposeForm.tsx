@@ -422,9 +422,7 @@ export default function ComposeForm() {
         </button>
       </div>
 
-      <div className="small" style={{ marginTop: 10 }}>
-        Note: the current server implementation is a stub and returns the original file. We'll plug in real arranging next.
-      </div>
+
     </div>
   );
 }
