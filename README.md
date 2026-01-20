@@ -50,7 +50,7 @@ Open http://localhost:3000
   - `subgenre` (string)
   - `instruments` (JSON array of instrument ids)
   - `sections` (JSON array of section configs)
-- `POST /api/jobs/:jobId/compose` – runs the composer (stub)
+- `POST /api/jobs/:jobId/compose` – runs the AI composer to generate musical arrangements
 - `GET /api/jobs/:jobId` – job status + metadata
 - `GET /api/jobs/:jobId/download` – streams the output MIDI
 
