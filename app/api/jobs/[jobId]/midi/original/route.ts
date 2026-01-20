@@ -29,6 +29,7 @@ export async function GET(
       }
     });
   } catch (error) {
-    return new Response('Failed to read MIDI file', { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return new Response(`Failed to read MIDI file: ${errorMessage}`, { status: 500 });
   }
 }

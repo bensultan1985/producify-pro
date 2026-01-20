@@ -52,7 +52,7 @@ export default function MidiPlayer({ jobId, onClose }: MidiPlayerProps) {
       
       // Original is available if job exists, enhanced is available if status is COMPLETE
       setHasOriginal(true);
-      setHasEnhanced(jobData.status === 'COMPLETE' && jobData.outputPath);
+      setHasEnhanced(jobData.status === 'COMPLETE' && !!jobData.outputPath);
 
       // Load MIDI file based on track type
       const url = trackType === 'original' 
@@ -70,8 +70,9 @@ export default function MidiPlayer({ jobId, onClose }: MidiPlayerProps) {
       pausedAtRef.current = 0;
       
       setIsLoading(false);
-    } catch (err: any) {
-      setError(err.message || 'Failed to load MIDI file');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to load MIDI file';
+      setError(errorMessage);
       setIsLoading(false);
     }
   }, [jobId, trackType, cleanup]);
