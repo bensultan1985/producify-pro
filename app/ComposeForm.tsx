@@ -365,7 +365,7 @@ export default function ComposeForm() {
 
           <div>
             <button type="button" onClick={addSection}>Add section</button>
-            <div className="small">If you don't care about sections, set all section modes to <b>all</b>.</div>
+            <div className="small">If you don&apos;t care about sections, set all section modes to <b>all</b>.</div>
           </div>
         </div>
       </div>

@@ -18,20 +18,20 @@ export default function Page() {
         </div>
 
         <div className="card">
-          <div className="cardTitle">How it works (current stub)</div>
+          <div className="cardTitle">How it works</div>
           <div className="notice">
             <p style={{ marginTop: 0 }}>
-              This starter app includes:
+              This app includes:
             </p>
             <ul style={{ marginTop: 0 }}>
               <li>Postgres schema (Prisma) for jobs + metadata</li>
               <li>Upload + store original MIDI on disk (./uploads) and job record in Postgres</li>
-              <li>"Compose" API endpoint that currently returns a copy of the original MIDI</li>
+              <li>&quot;Compose&quot; API endpoint that uses OpenAI to generate musical arrangements</li>
               <li>Download endpoint that streams the produced MIDI</li>
             </ul>
             <div className="hr" />
             <p style={{ marginBottom: 0 }}>
-              Next iteration: we can plug in a real arranger (LLM/tooling), parse the original MIDI, and generate new tracks.
+              The AI composer analyzes your MIDI, understands the musical context, and generates complementary arrangements based on your selected instruments and genre.
             </p>
           </div>
 
