@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import type { Instrument, SectionConfig, InstrumentSelectionMode, SectionName } from './types';
+import MidiPlayer from './MidiPlayer';
 
 const DEFAULT_INSTRUMENTS: Instrument[] = [
   { id: 'drums', label: 'Drums / Percussion' },
@@ -365,7 +366,7 @@ export default function ComposeForm() {
 
           <div>
             <button type="button" onClick={addSection}>Add section</button>
-            <div className="small">If you don't care about sections, set all section modes to <b>all</b>.</div>
+            <div className="small">If you don&apos;t care about sections, set all section modes to <b>all</b>.</div>
           </div>
         </div>
       </div>
@@ -398,6 +399,8 @@ export default function ComposeForm() {
         </div>
       ) : null}
 
+      {jobId ? <MidiPlayer jobId={jobId} /> : null}
+
       <div className="btnRow" style={{ marginTop: 14 }}>
         <button
           type="button"
@@ -423,7 +426,7 @@ export default function ComposeForm() {
       </div>
 
       <div className="small" style={{ marginTop: 10 }}>
-        Note: the current server implementation is a stub and returns the original file. We'll plug in real arranging next.
+        Note: the current server implementation is a stub and returns the original file. We&apos;ll plug in real arranging next.
       </div>
     </div>
   );

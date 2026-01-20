@@ -8,6 +8,7 @@ out
 # env
 .env
 .env.local
+.env.dev
 
 # prisma
 prisma/migrations

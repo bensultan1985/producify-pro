@@ -6,7 +6,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 enum JobStatus {
@@ -17,15 +16,15 @@ enum JobStatus {
 }
 
 model CompositionJob {
-  id           String    @id @default(cuid())
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  status       JobStatus @default(PENDING)
-  genre        String?
-  subgenre     String?
-  instruments  Json
-  sections     Json
+  status      JobStatus @default(PENDING)
+  genre       String?
+  subgenre    String?
+  instruments Json
+  sections    Json
 
   originalPath String
   outputPath   String?
