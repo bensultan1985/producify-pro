@@ -366,7 +366,7 @@ export default function ComposeForm() {
 
           <div>
             <button type="button" onClick={addSection}>Add section</button>
-            <div className="small">If you don't care about sections, set all section modes to <b>all</b>.</div>
+            <div className="small">If you don&apos;t care about sections, set all section modes to <b>all</b>.</div>
           </div>
         </div>
       </div>
@@ -426,7 +426,7 @@ export default function ComposeForm() {
       </div>
 
       <div className="small" style={{ marginTop: 10 }}>
-        Note: the current server implementation is a stub and returns the original file. We'll plug in real arranging next.
+        Note: the current server implementation is a stub and returns the original file. We&apos;ll plug in real arranging next.
       </div>
     </div>
   );

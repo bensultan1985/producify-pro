@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import * as Tone from 'tone';
 import { Midi } from '@tonejs/midi';
 
@@ -28,14 +28,18 @@ export default function MidiPlayer({ jobId, onClose }: MidiPlayerProps) {
   const startTimeRef = useRef<number>(0);
   const pausedAtRef = useRef<number>(0);
 
-  useEffect(() => {
-    loadMidiFile();
-    return () => {
-      cleanup();
-    };
-  }, [jobId, trackType]);
+  const cleanup = useCallback(() => {
+    if (timeIntervalRef.current) {
+      clearInterval(timeIntervalRef.current);
+      timeIntervalRef.current = null;
+    }
+    synthsRef.current.forEach(synth => synth.dispose());
+    synthsRef.current = [];
+    Tone.getTransport().stop();
+    Tone.getTransport().cancel();
+  }, []);
 
-  async function loadMidiFile() {
+  const loadMidiFile = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     cleanup();
@@ -70,18 +74,14 @@ export default function MidiPlayer({ jobId, onClose }: MidiPlayerProps) {
       setError(err.message || 'Failed to load MIDI file');
       setIsLoading(false);
     }
-  }
+  }, [jobId, trackType, cleanup]);
 
-  function cleanup() {
-    if (timeIntervalRef.current) {
-      clearInterval(timeIntervalRef.current);
-      timeIntervalRef.current = null;
-    }
-    synthsRef.current.forEach(synth => synth.dispose());
-    synthsRef.current = [];
-    Tone.getTransport().stop();
-    Tone.getTransport().cancel();
-  }
+  useEffect(() => {
+    loadMidiFile();
+    return () => {
+      cleanup();
+    };
+  }, [loadMidiFile, cleanup]);
 
   async function play() {
     if (!midiDataRef.current) return;

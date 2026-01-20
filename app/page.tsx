@@ -26,7 +26,7 @@ export default function Page() {
             <ul style={{ marginTop: 0 }}>
               <li>Postgres schema (Prisma) for jobs + metadata</li>
               <li>Upload + store original MIDI on disk (./uploads) and job record in Postgres</li>
-              <li>"Compose" API endpoint that currently returns a copy of the original MIDI</li>
+              <li>&quot;Compose&quot; API endpoint that currently returns a copy of the original MIDI</li>
               <li>Download endpoint that streams the produced MIDI</li>
             </ul>
             <div className="hr" />
