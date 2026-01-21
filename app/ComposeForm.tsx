@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import type { Instrument, SectionConfig, InstrumentSelectionMode, SectionName } from './types';
+import MidiPlayer from './MidiPlayer';
 
 const DEFAULT_INSTRUMENTS: Instrument[] = [
   { id: 'drums', label: 'Drums / Percussion' },
@@ -398,6 +399,8 @@ export default function ComposeForm() {
         </div>
       ) : null}
 
+      {jobId ? <MidiPlayer jobId={jobId} /> : null}
+
       <div className="btnRow" style={{ marginTop: 14 }}>
         <button
           type="button"
@@ -421,8 +424,6 @@ export default function ComposeForm() {
           {busy ? 'Composing…' : 'Compose'}
         </button>
       </div>
-
-
     </div>
   );
 }
